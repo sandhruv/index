@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Google Form</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<form autocomplete="off" method="post" name="google-sheet">
+			<h3><center>Fill This Form</center></h3>
+			
+			<input type="text" placeholder="Type your name here" name="firstname" required>
+			<input type="email" placeholder="Type your email here" name="email" required>
+			<input type="text" placeholder="Type your number here" name="number" required>
+			
+			<select name="course" required>
+				<option value="Not Selected">Select an option</option>
+				<option value="BCA">BCA</option>
+				<option value="bsc it">BSc IT</option>
+				<option value="btech cs">BTech CS</option>
+				<option value="bsc cs">BSc CS</option>
+			</select>
+			
+			<textarea rows="4" placeholder="How can we help you?" name="message"></textarea>
+
+			<!-- Gender Radio Buttons -->
+			<div>
+				<label><input type="radio" name="gender" value="male" required> Male</label>
+				<label><input type="radio" name="gender" value="female"> Female</label>
+			</div>
+
+			<br>
+			<button type="submit" name="submit">Send</button>
+			<button type="reset" class="reset">Reset</button>
+		</form>
+	</div>
+	<script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycby7SXkHoX8nvmQGg1YKO2Drw_BFxqRgxAQyle3c5u0B-cEcXepLgWTUgWj7a0E7ej4D/exec'
+            const form = document.forms['google-sheet']
+          
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => alert("Thanks for Contacting us..! We Will Contact You Soon..."))
+                .catch(error => console.error('Error!', error.message))
+            })
+          </script>
+
+</body>
+</html>
